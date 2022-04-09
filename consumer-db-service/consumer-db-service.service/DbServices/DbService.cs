@@ -22,7 +22,6 @@ namespace consumer_db_service.service.DbServices
             // write to database or something else
 
             // Some operations
-
             var endpoint = await _bus.GetSendEndpoint(new Uri($"queue:message-status-sent")); // move queue name to appsettings.
             await endpoint.Send(new MessageStatus
             {
