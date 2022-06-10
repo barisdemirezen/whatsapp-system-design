@@ -18,7 +18,7 @@ docker compose up
 
 You can see only one load balancer in diagram but it should be one for each in real life :smile:	
 
-![image-20220610193528354](C:\Users\ironcrusher\AppData\Roaming\Typora\typora-user-images\image-20220610193528354.png)
+![image-20220610193528354](https://i.ibb.co/0cdY6qk/image.png)
 
 ## Tech Stack 🔥
 
