@@ -5,6 +5,8 @@ import { BsCheck } from 'react-icons/bs';
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
+import UserItem from './components/UserItem';
+
 function App() {
 
   const [senderSocket, setSenderSocket] = useState()
@@ -26,6 +28,7 @@ function App() {
   }, [])
 
   const sendMsg = () => {
+    console.log(text)
     senderSocket.emit('message', text);
     setText("");
   }
@@ -37,7 +40,7 @@ function App() {
   }
 
   const openChat = () => {
-
+    console.log("pressed")
   }
 
   return (
@@ -61,21 +64,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="row wa-item-chat py-2 cursor-pointer" onClick={() => openChat()}>
-              <div className="col-2 p-0">
-                <img src="https://randomuser.me/api/portraits/men/1.jpg" className="rounded-circle img-fluid" />
-              </div>
-              <div className="col-8">
-                <b>John Doe</b>
-                <br />
-                <p className="wa-preview-message">Hey dont you see my...</p>
-              </div>
-              <div className="col-2" style={{ textAlign: "right" }}>
-                <span>16:24</span>
-                <span className="badge badge-pill wa-badge">54</span>
-              </div>
-            </div>
-            <hr />
+            <UserItem openChat={openChat} />
             <div className="row wa-item-chat py-2 cursor-pointer" onClick={() => openChat()}>
               <div className="col-2 p-0">
                 <img src="https://randomuser.me/api/portraits/men/1.jpg" className="rounded-circle img-fluid" />
@@ -181,6 +170,9 @@ function App() {
                       <input
                         className="form-control wa-input"
                         placeholder="Enter your message"
+                        onChange={(e) => setText(e.target.value)}
+                        onKeyDown={(e) => inputEnter(e)}
+                        value={text}
                       />
                     </div>
                     <div className="col-1 m-auto cursor-pointer">
@@ -193,62 +185,6 @@ function App() {
           </div>
         </div>
       </div>
-
-
-      {/* <Container>
-        <Row className="my-4 header">
-          <Col xs={3} className="header-profile-col p-0">
-            <div className='d-flex gap-3 align-items-center px-4 py-2'>
-              <Image className="profile-pic" src="https://randomuser.me/api/portraits/men/32.jpg" roundedCircle={true} />
-              <div className='text-white'>Barış</div>
-            </div>
-            <div className='profile-col-dark row gap-2'>
-              <Col xs={2}>
-                <Image className="img-fluid" src="https://randomuser.me/api/portraits/men/32.jpg" roundedCircle={true} />
-              </Col>
-              <Col xs={8}>Bar Dem</Col>
-              <Col xs={2}>18:20</Col>
-            </div>
-          </Col>
-          <Col xs={9} className="">
-            <Row className="py-2">
-              <Col xs={1} className="receiver-col">
-                <Image className="profile-pic" src="https://randomuser.me/api/portraits/women/11.jpg" roundedCircle={true} />
-              </Col>
-              <Col xs={11} className="d-flex align-middle ps-0">
-                <div className="receiver-name d-flex align-items-center">Gamze</div>
-              </Col>
-            </Row>
-
-            <Row className="chat-area overflow-scroll-y pt-4 pb-1 px-3">
-              <Col>
-                {
-                  messages.map((e, index) => <div className="message my-2 py-1 px-3 rounded d-flex align-items-end justify-content-between" key={index}><div className='text-wrap text-break'>{e.Message}</div><div>{status[e.MessageStatusType]}</div></div>)
-                }
-              </Col>
-            </Row>
-
-            <Row className="input-row py-3">
-              <Col xs={1}></Col>
-              <Col>
-                <InputGroup className="">
-                  <FormControl
-                    placeholder="Write a message"
-                    className="text-area py-2"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    onKeyDown={(e) => inputEnter(e)}
-                  />
-                </InputGroup>
-              </Col>
-              <Col xs={1} className="d-flex align-items-center">
-                <RiSendPlane2Fill onClick={() => sendMsg()} color={'#8696a0'} size={24} className="cursor-pointer" />
-              </Col>
-            </Row>
-
-          </Col>
-        </Row>
-      </Container> */}
     </div>
   );
 }
